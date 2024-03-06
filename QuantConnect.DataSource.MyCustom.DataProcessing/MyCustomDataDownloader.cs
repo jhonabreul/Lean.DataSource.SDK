@@ -27,13 +27,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using QuantConnect.Configuration;
-using QuantConnect.Data.Auxiliary;
-using QuantConnect.DataSource;
-using QuantConnect.Lean.Engine.DataFeeds;
 using QuantConnect.Logging;
 using QuantConnect.Util;
 
-namespace QuantConnect.DataProcessing
+namespace QuantConnect.DataSource.MyCustom.DataProcessing
 {
     /// <summary>
     /// MyCustomDataDownloader implementation.
@@ -42,7 +39,7 @@ namespace QuantConnect.DataProcessing
     {
         public const string VendorName = "VendorName";
         public const string VendorDataName = "VendorDataName";
-        
+
         private readonly string _destinationFolder;
         private readonly string _universeFolder;
         private readonly string _clientKey;
@@ -55,7 +52,7 @@ namespace QuantConnect.DataProcessing
             '_'
         };
         private ConcurrentDictionary<string, ConcurrentQueue<string>> _tempData = new();
-        
+
         private readonly JsonSerializerSettings _jsonSerializerSettings = new()
         {
             DateTimeZoneHandling = DateTimeZoneHandling.Utc
@@ -67,7 +64,7 @@ namespace QuantConnect.DataProcessing
         private readonly RateGate _indexGate;
 
         /// <summary>
-        /// Creates a new instance of <see cref="MyCustomData"/>
+        /// Creates a new instance of <see cref="MyCustom"/>
         /// </summary>
         /// <param name="destinationFolder">The folder where the data will be saved</param>
         /// <param name="apiKey">The Vendor API key</param>
@@ -123,7 +120,7 @@ namespace QuantConnect.DataProcessing
 
                         // Responses are in JSON: you need to specify the HTTP header Accept: application/json
                         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                        
+
                         // Makes sure we don't overrun Quiver rate limits accidentally
                         _indexGate.WaitToProceed();
 
@@ -180,7 +177,7 @@ namespace QuantConnect.DataProcessing
                 }
             }
 
-            var finalLines = destinationFolder.Contains("universe") ? 
+            var finalLines = destinationFolder.Contains("universe") ?
                 lines.OrderBy(x => x.Split(',').First()).ToList() :
                 lines
                 .OrderBy(x => DateTime.ParseExact(x.Split(',').First(), "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal))

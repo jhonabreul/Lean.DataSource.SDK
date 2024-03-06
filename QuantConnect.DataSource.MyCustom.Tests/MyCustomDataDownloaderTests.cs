@@ -19,7 +19,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using QuantConnect.Lean.DataSource.MyCustom;
 
-namespace QuantConnect.DataLibrary.Tests
+namespace QuantConnect.DataSource.MyCustom.Tests
 {
     [TestFixture]
     public class MyCustomDataDownloaderTests

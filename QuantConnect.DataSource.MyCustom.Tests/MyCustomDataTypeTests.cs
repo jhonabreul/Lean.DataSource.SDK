@@ -22,9 +22,8 @@ using ProtoBuf.Meta;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using QuantConnect.Data;
-using QuantConnect.DataSource;
 
-namespace QuantConnect.DataLibrary.Tests
+namespace QuantConnect.DataSource.MyCustom.Tests
 {
     [TestFixture]
     public class MyCustomDataTypeTests
@@ -87,7 +86,7 @@ namespace QuantConnect.DataLibrary.Tests
 
         private BaseData CreateNewInstance()
         {
-            return new MyCustomDataType
+            return new MyCustom
             {
                 Symbol = Symbol.Empty,
                 Time = DateTime.Today,

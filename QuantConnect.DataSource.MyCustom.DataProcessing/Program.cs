@@ -19,7 +19,7 @@ using QuantConnect.Configuration;
 using QuantConnect.Logging;
 using QuantConnect.Util;
 
-namespace QuantConnect.DataProcessing
+namespace QuantConnect.DataSource.MyCustom.DataProcessing
 {
     /// <summary>
     /// Entrypoint for the data downloader/converter
@@ -37,7 +37,7 @@ namespace QuantConnect.DataProcessing
             var destinationDirectory = Path.Combine(
                 Config.Get("temp-output-directory", "/temp-output-directory"),
                 "alternative",
-                "vendorname");
+                "mycustom");
 
             MyCustomDataDownloader instance = null;
             try
@@ -73,7 +73,7 @@ namespace QuantConnect.DataProcessing
                 // Run cleanup of the downloader/converter once it has finished or crashed.
                 instance.DisposeSafely();
             }
-            
+
             // The downloader/converter was successful
             Environment.Exit(0);
         }

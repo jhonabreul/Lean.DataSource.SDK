@@ -38,7 +38,7 @@ namespace QuantConnect.Algorithm.CSharp
             SetCash(100000);
 
             // add a custom universe data source (defaults to usa-equity)
-            AddUniverse<MyCustomDataUniverseType>("MyCustomDataUniverseType", Resolution.Daily, data =>
+            AddUniverse<MyCustomUniverse>("MyCustomDataUniverseType", Resolution.Daily, data =>
             {
                 foreach (var datum in data)
                 {

@@ -16,22 +16,26 @@
 
 using System;
 using System.IO;
-using NUnit.Framework;
 using System.Collections;
+using NUnit.Framework;
 using QuantConnect.Logging;
 using QuantConnect.Configuration;
 
-namespace QuantConnect.DataLibrary.Tests
+namespace QuantConnect.DataSource.MyCustom.Tests
 {
-    [TestFixture]
+    [SetUpFixture]
     public class TestSetup
     {
-        [Test, TestCaseSource(nameof(TestParameters))]
-        public void TestSetupCase()
+        [OneTimeSetUp]
+        public void SetUp()
         {
+            Log.LogHandler = new CompositeLogHandler();
+            Log.Trace("TestSetup(): starting...");
+            ReloadConfiguration();
+            Log.DebuggingEnabled = Config.GetBool("debug-mode");
         }
 
-        public static void ReloadConfiguration()
+        private static void ReloadConfiguration()
         {
             // nunit 3 sets the current folder to a temp folder we need it to be the test bin output folder
             var dir = TestContext.CurrentContext.TestDirectory;
@@ -57,23 +61,6 @@ namespace QuantConnect.DataLibrary.Tests
 
             // resets the version among other things
             Globals.Reset();
-        }
-
-        private static void SetUp()
-        {
-            Log.LogHandler = new CompositeLogHandler();
-            Log.Trace("TestSetup(): starting...");
-            ReloadConfiguration();
-            Log.DebuggingEnabled = Config.GetBool("debug-mode");
-        }
-
-        private static TestCaseData[] TestParameters
-        {
-            get
-            {
-                SetUp();
-                return new[] { new TestCaseData() };
-            }
         }
     }
 }

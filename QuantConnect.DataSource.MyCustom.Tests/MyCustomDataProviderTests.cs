@@ -27,10 +27,10 @@ using QuantConnect.Data.Market;
 using System.Collections.Generic;
 using QuantConnect.Lean.DataSource.MyCustom;
 
-namespace QuantConnect.DataLibrary.Tests
+namespace QuantConnect.DataSource.MyCustom.Tests
 {
     [TestFixture]
-    public class MyCustomDataQueueHandlerTests
+    public class MyCustomDataProviderTests
     {
         private static IEnumerable<TestCaseData> TestParameters
         {

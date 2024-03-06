@@ -23,9 +23,8 @@ using QuantConnect.Tests;
 using QuantConnect.Lean.DataSource.MyCustom;
 using QuantConnect.Securities;
 using System.Collections.Generic;
-using QuantConnect.Tests.Common.Exceptions;
 
-namespace QuantConnect.DataLibrary.Tests
+namespace QuantConnect.DataSource.MyCustom.Tests
 {
     [TestFixture]
     public class MyCustomDataProviderHistoryTests

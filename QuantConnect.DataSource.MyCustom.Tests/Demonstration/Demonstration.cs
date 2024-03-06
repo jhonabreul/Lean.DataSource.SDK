@@ -20,7 +20,7 @@ using QuantConnect.Orders;
 using QuantConnect.Algorithm;
 using QuantConnect.DataSource;
 
-namespace QuantConnect.DataLibrary.Tests
+namespace QuantConnect.DataSource.MyCustom.Tests
 {
     /// <summary>
     /// Example algorithm using the custom data type as a source of alpha
@@ -38,7 +38,7 @@ namespace QuantConnect.DataLibrary.Tests
             SetStartDate(2013, 10, 07);  //Set Start Date
             SetEndDate(2013, 10, 11);    //Set End Date
             _equitySymbol = AddEquity("SPY").Symbol;
-            _customDataSymbol = AddData<MyCustomDataType>(_equitySymbol).Symbol;
+            _customDataSymbol = AddData<MyCustom>(_equitySymbol).Symbol;
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace QuantConnect.DataLibrary.Tests
         /// <param name="slice">Slice object keyed by symbol containing the stock data</param>
         public override void OnData(Slice slice)
         {
-            var data = slice.Get<MyCustomDataType>();
+            var data = slice.Get<MyCustom>();
             if (!data.IsNullOrEmpty())
             {
                 // based on the custom data property we will buy or short the underlying equity
